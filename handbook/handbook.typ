@@ -229,3 +229,13 @@ Similar to `which - else` else statement executes if loop finished with no break
 Python provides to keywords:
 - `continue`: Execution jumps to the top of the loop and expression is re-evaluated
 - `break`: Terminates the loop entirely.
+
+== Conclusions
+Some important concepts to keep in mind are: 
+- `==` checks if object values are equal. Meanwhile `is` checks if two variables refer to the same object.
+- `None` object is a singleton. 
+ - That is why it is better to use `a is None` than `a == None`.
+- `for` loop uses an iterator object:
+  + Calls `iter()` to obtain an iterator
+  + Calls `next()` to obtain each iter from the iterator in turn.
+  + Terminates the loop when `next()` raises the `StopIterator` exception.
