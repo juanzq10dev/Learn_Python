@@ -1,0 +1,31 @@
+name: Compile Handbook
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  compile-handbook:
+    runs-on: ubuntu-latest
+    container:
+      image: 123marvin123/typst:latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Compile Handbook
+        run: typst compile handbook/handbook.typ ./handbook/handbook.pdf
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: handbook
+          path: ./handbook/handbook.pdf
+          retention-days: 30
+
+    continue-on-error: true

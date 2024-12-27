@@ -1,0 +1,28 @@
+name: Monorepo Code Compliance
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+jobs:
+  code-compliance:
+    runs-on: ubuntu-latest
+    container:
+      image: node:20-slim
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Run Prettier Check
+        run: npx --yes prettier . --check
+
+      - name: Run Plain Compliance Check
+        run: ./ci/scripts/check-plain-compliance.sh
+        shell: bash
+
+    continue-on-error: false
