@@ -129,3 +129,103 @@ Correct.
   case other:
     print("No match found")
 ```)
+
+== Loops
+=== Indefinite iteration (while)
+- With indefinite iteration the number of times the loop executes is not explicit.
+
+- The loop block executes as long as some condition is met.
+
+#codeBlock(```python
+ while <expression>:
+  <statement(s)>
+```)
+
+==== While - else
+You can also use `while-else` statement.
+#codeBlock(```python
+count = 0
+while (count < 3):
+  count = count + 1
+  print("Hello")
+else:
+  print("Else block")
+
+  # Output:
+  #   Hello
+  #   Hello
+  #   Hello
+  #   Else block
+```)
+
+If you use break, else statement will not execute
+
+=== Definite iteration (for)
+- The number of iterations is specified explicitly before loop execution.
+
+Python uses `for in` syntax:
+#codeBlock(```python
+for <var> in <iterable>:
+  <statement(s)>
+```)
+
+An iterable is a collection of objects: lists, tuples, strings and dictionaries.
+
+#codeBlock(```python
+list = ["apple", "orange", "banana"]
+for i in list:
+  print(i)
+
+# Prints: apple orange banana
+```)
+
+==== How does for loop work?
+Python contains the iterator object to iterate through an iterable:
+
+#codeBlock(```python
+list_ = ["apple", "orange", "banana"]
+
+itr = iter(list_)
+
+next(itr) # "apple"
+next(itr) # "orange"
+next(itr) # "banana"
+
+next(itr) # StopIterationException
+```)
+
+So what python `for` loop does is:
++ Calls `iter()` to obtain an iterator
++ Calls `next()` to obtain each iterm from the iterator in turn.
++ Terminates the loop when `next()` raises the `StopIterator` exception.
+
+This way all iterable objects can be the target of a for loop.
+
+==== The range object
+Python uses the range object to iterate through numbers
+
+#codeBlock(```python
+range(<begin>, <end>, <stride>)
+```)
+
+Parameters of range are:
+- begin: Starting value
+- end: End value
+- stride: Amount of skipped values
+
+#codeBlock(```python
+for i in range(0, 10):
+  print(i)
+```)
+
+Some key features of range:
+- Range is an iterable object (not a list, not a tuple).
+- Range objects are lazy loading
+
+==== For - else
+Similar to `which - else` else statement executes if loop finished with no break.
+
+=== Loop Control Statements
+Python provides to keywords:
+- `continue`: Execution jumps to the top of the loop and expression is re-evaluated
+- `break`: Terminates the loop entirely.
