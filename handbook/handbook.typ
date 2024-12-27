@@ -85,7 +85,7 @@ Python has the following build-in data types
 - Python uses `if` as many other languages
 - Python can use `elif` also.
 
-=== Ternary operator 
+=== Ternary operator
 A simple form of the conditional expression.
 #codeBlock(```python
 <expr1> if <conditional_expr> else <expr2>
@@ -107,7 +107,7 @@ A simple form of the conditional expression.
 
 #codeBlock(```python
  if True:
-   pass 
+   pass
 
  print('foo')
 ```)
