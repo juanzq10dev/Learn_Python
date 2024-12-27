@@ -66,7 +66,7 @@ Use f-strings to format string
  f"She said her name is {name}" # => "She said her name is Reiko"
 ```)
 
-== None
+== None type
 - None is an object
 - None is a *singleton* object
 - Do not use `==` to compare `None` use `is` instead. Some corner cases may fail using `==`:
@@ -91,20 +91,22 @@ A simple form of the conditional expression.
 <expr1> if <conditional_expr> else <expr2>
 ```)
 
+Example:
 #codeBlock(```python
 'yes' if ('qux' in ['foo', 'bar', 'baz']) else 'no' # => 'no'
 ```)
 
 === The pass statement.
-- It is not possible to specify en empty block because python uses identation instead of delimiters.
-- The `pass` statement solves this problem.
+- Used to specify empty blocks in python
 
+Wrong:
 #codeBlock(```python
  if True:
 
  print('foo') # => IndentationError: expected an indented block
 ```)
 
+Correct.
 #codeBlock(```python
  if True:
    pass
@@ -114,3 +116,16 @@ A simple form of the conditional expression.
 
 === The match statement
 - Equivalent to switch
+
+#codeBlock(```python
+ a = 3
+ match a:
+  case 1:
+    print("a = 1")
+  case 2:
+    print("a = 2")
+  case 3:
+    print("a = 3")
+  case other:
+    print("No match found")
+```)
