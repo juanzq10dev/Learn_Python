@@ -243,3 +243,131 @@ Some important concepts to keep in mind are:
   + Calls `iter()` to obtain an iterator
   + Calls `next()` to obtain each iter from the iterator in turn.
   + Terminates the loop when `next()` raises the `StopIterator` exception.
+
+= Design Patterns
+== Decorator
+- Adds new functionality to an existing object without modifying its structure.
+- Applied to functions and classes.
+
+=== How to create decorators
+A decorator is a function that:
++ Takes a function as an argument.
++ Uses an enclosed function to add more functionality.
++ Returns the enclosed function.
+
+#codeBlock(```python
+def uppercase_decorator(function): # decorator
+    def wrapper(): # enclosed function
+        func = function()
+        make_uppercase = func.upper()
+        return make_uppercase
+
+    return wrapper
+```)
+
+=== Calling decorators
+This is how we call decorators.
+
+#codeBlock(```python
+def say_hi():
+  return 'hello there'
+
+decorate = uppercase_decorator(say_hi)
+decorate() # Output: HELLO THERE
+```)
+
+Python provides a sugar syntax #footnote("A sugar syntax is syntax designed to make code easier to read or write.") for that:
+
+#codeBlock(```python
+@uppercase_decorator
+def say_hi():
+    return 'hello there'
+
+say_hi() # Output: HELLO THERE
+```)
+
+=== Applying multiple decorators
+Decorators apply from the bottom up.
+
+#codeBlock(```python
+@split_string        # This applies second
+@uppercase_decorator # This applies first
+def say_hi():
+    return 'hello there'
+
+say_hi() # Output: [HELLO, THERE]
+```)
+
+=== Adding params to the wrapped functions
+If the decorated function has params:
++ Pass the arguments to the wrapper function.
++ Inside the wrapper function, pass the arguments to the decorated function.
+
+#codeBlock(```python
+def uppercase_decorator(function):
+    def wrapper(name):
+        func = function(name) # decorated function
+        make_uppercase = func.upper()
+        return make_uppercase
+
+    return wrapper
+
+@uppercase_decorator
+def say_hi(name):
+    return f'hello there {name}'
+
+say_hi("Alice") # Output: [HELLO, THERE]
+```)
+
+=== General purpose decorators
+To define a decorator that can be applied to any function use `*args` and `**kwargs`.
+#codeBlock(```python
+def my_decorator(func):
+    def wrapper(*args, **kwargs):
+        print("Before the function call.")
+        result = func(*args, **kwargs)
+        print("After the function call.")
+        return result
+    return wrapper
+
+@my_decorator
+def greet(name):
+    print(f"Hello, {name}!")
+
+greet("Alice")
+```)
+
+=== Passing arguments to the decorator
+In order to create a decorator with arguments:
++ Create a decorator maker with the decorator arguments
++ Inside it add a decorator function the wrapper function
+#codeBlock(```python
+def repeat(n): # decorator maker
+  def decorator(func): # decorator
+    def wrapper(*args, **kwargs):
+      for _ in range(n):
+          func(*args, **kwargs)
+    return wrapper
+  return decorator
+
+@repeat(3) # decorator with argument
+def greet(name):
+  print(f"Hello, {name}!")
+
+greet("Alice")
+```)
+
+=== Debugging decorators
+When you decorate a function, its metadata (like name and docstring) gets replaced by the wrapper's metadata. Use `functools.wraps` decorator to preserve it.
+#codeBlock(```python
+from functools import wraps
+
+def my_decorator(func):
+  @wraps(func) # functool.wraps decorator
+  def wrapper(*args, **kwargs):
+    print("Before the function call.")
+    result = func(*args, **kwargs)
+    print("After the function call.")
+    return result
+  return wrapper
+```)
