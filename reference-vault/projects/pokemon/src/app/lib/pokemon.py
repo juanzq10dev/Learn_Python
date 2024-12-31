@@ -1,3 +1,5 @@
+import app.lib.logs as logs
+
 class Pokemon:
     def __init__(self, name: str, hp: int):
         self.name = name
@@ -7,7 +9,7 @@ class Pokemon:
 
     def attack(self, target: "Pokemon"):
         target.hp -= 10
-        print(f"{self.name} attacked")
+        logs.attack(self.name)
     
     
     def heal(self):

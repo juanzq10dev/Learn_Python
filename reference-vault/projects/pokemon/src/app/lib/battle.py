@@ -21,9 +21,12 @@ class Battle:
     def game_loop(self):
         game_finished = False
         while not game_finished:
+            self.show_health_bars()
             self.action()
             game_finished = self.check_game_finished()
             self.change_turn()
+
+        self.show_health_bars()
 
     def check_game_finished(self) -> bool:
         if self.player1.hp <= 0:
@@ -39,7 +42,7 @@ class Battle:
     def action(self):
         logs.choose_action(self.players_turn.name)
 
-        user_input = input("Select action:")
+        user_input = input("Select action: ")
 
         if user_input.isdigit():
             user_input = int(user_input)
@@ -55,3 +58,7 @@ class Battle:
             case _:
                 logs.invalid_action()
                 self.action()
+
+    def show_health_bars(self):
+        logs.show_pokemon_healthbar(self.player1)
+        logs.show_pokemon_healthbar(self.player2)
