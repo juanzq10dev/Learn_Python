@@ -1,4 +1,5 @@
 import app.lib.logs as logs
+import app.lib.io as io
 from app.lib.pokemon import Pokemon
 
 
@@ -41,16 +42,14 @@ class Battle:
 
     def action(self):
         logs.choose_action(self.players_turn.name)
+        
+        user_input_int = io.read_input_int("Select action: ")
 
-        user_input = input("Select action: ")
-
-        if user_input.isdigit():
-            user_input = int(user_input)
-        else:
+        if user_input_int is None:
             logs.invalid_action()
             self.action()
 
-        match user_input:
+        match user_input_int:
             case 1:
                 self.players_turn.attack(self.not_players_turn)
             case 2:
