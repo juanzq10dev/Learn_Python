@@ -51,7 +51,7 @@ class Battle:
 
         match user_input_int:
             case 1:
-                self.players_turn.attack(self.not_players_turn)
+                self.players_turn.use_move(1, self.not_players_turn)
             case 2:
                 self.players_turn.heal()
             case _:
