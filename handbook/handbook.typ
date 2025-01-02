@@ -44,8 +44,8 @@
   [Group of individual statements, which make a single code block],
 )
 
-= Basic syntax
-Those are notes of some interesting things I found from the python syntax.
+= Python basics
+Those are notes of some interesting things I found from the python basics.
 
 == Python multi-line statements
 Use the line continuation character (\\) to denote line should continue
@@ -230,8 +230,29 @@ Python provides to keywords:
 - `continue`: Execution jumps to the top of the loop and expression is re-evaluated
 - `break`: Terminates the loop entirely.
 
+== Type Casting
+Type casting is the process of converting data of one type to another.
+
+There are two types of conversion in Python:
+- Implicit Conversion (automatic)
+- Explicit Conversion (manual)
+
+=== Implicit Conversion
+- Sometimes Python automatically converts one data-type to another.
+- This occurs automatically
+- Python allways converts smaller data types to larger data types to avoid the loss of data.
+- Typically happens during operations that involved mixed data.
+#codeBlock(```python
+num_int = 6
+num_float = 1.2
+result = num_int + num_float # 6 (int) converts to 6.0 (float)
+```)
+
+=== Explicit Conversion
+- Uses build-in function like `int()`, `float()`, `str()` to perform explicit type conversion.
+- Loss of data may occur as we enforc the object to a specific data type.
+
 == TO DO
-- Type Casting
 - Exceptions
 
 == Conclusions
@@ -239,6 +260,8 @@ Some important concepts to keep in mind are:
 - `==` checks if object values are equal. Meanwhile `is` checks if two variables refer to the same object.
 - `None` object is a singleton.
   - That is why it is better to use `a is None` than `a == None`.
+- There are two types of type conversion (casting): implicit and explicit.
+- There are two types of iterations: definite and indefinite.
 - `for` loop uses an iterator object:
   + Calls `iter()` to obtain an iterator
   + Calls `next()` to obtain each iter from the iterator in turn.
