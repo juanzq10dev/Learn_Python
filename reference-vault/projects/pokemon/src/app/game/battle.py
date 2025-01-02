@@ -1,5 +1,5 @@
-import app.lib.logs as logs
-import app.lib.io as io
+import app.ui.messages as logs
+import app.ui.io as io
 from app.lib.pokemon import Pokemon
 
 

@@ -1,4 +1,4 @@
-import app.lib.battle as battle
+import app.game.battle as battle
 
 def main() -> None:
     battle.Battle().game_loop()
