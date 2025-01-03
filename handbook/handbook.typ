@@ -257,7 +257,7 @@ result = num_int + num_float # 6 (int) converts to 6.0 (float)
 - Python comes with many build-in exceptions.
 
 === Handling Exceptions
-- Python uses the `try` `except` block to catch and handle exceptions.
+Python uses the `try` `except` block to catch and handle exceptions.
 
 #codeBlock(```python
 try:
@@ -266,7 +266,7 @@ except:
   <statement(s)>
 ```)
 
-- You can catch specific exceptions:
+You can catch specific exceptions:
 #codeBlock(```python
 try:
   <statement(s)>
@@ -274,7 +274,7 @@ except ValueError:
   <statement(s)>
 ```)
 
-- You can catch different exceptions at once.
+You can catch different exceptions at once.
 #codeBlock(```python
 try:
   <statement(s)>
@@ -341,7 +341,7 @@ class CustomError(Exception):
   pass
 ```)
 
-- We can also customize the exception adding a constructor.
+We can also customize the exception adding a constructor.
 
 == TO DO
 - Self documenting expressions
@@ -358,6 +358,7 @@ Some important concepts to keep in mind are:
   + Calls `iter()` to obtain an iterator
   + Calls `next()` to obtain each iter from the iterator in turn.
   + Terminates the loop when `next()` raises the `StopIterator` exception.
+- The `finally` clause contain some complex cases. (Review the exceptions notes or the exceptions jupiter notebook on the repo)
 
 = Design Patterns
 == Decorator
