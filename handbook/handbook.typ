@@ -250,10 +250,102 @@ result = num_int + num_float # 6 (int) converts to 6.0 (float)
 
 === Explicit Conversion
 - Uses build-in function like `int()`, `float()`, `str()` to perform explicit type conversion.
-- Loss of data may occur as we enforc the object to a specific data type.
+- Loss of data may occur as we enforce the object to a specific data type.
+
+== Exceptions
+- Exceptions are events that disrupt the normal flow of a program's instructions.
+- Python comes with many build-in exceptions.
+
+=== Handling Exceptions
+- Python uses the `try` `except` block to catch and handle exceptions.
+
+#codeBlock(```python
+try:
+  <statement(s)>
+except:
+  <statement(s)>
+```)
+
+- You can catch specific exceptions:
+#codeBlock(```python
+try:
+  <statement(s)>
+except ValueError:
+  <statement(s)>
+```)
+
+- You can catch different exceptions at once.
+#codeBlock(```python
+try:
+  <statement(s)>
+except (ValueError, RuntimeError, TypeError):
+  <statement(s)>
+```)
+
+=== How try - except works
++ First, the try statement(s) are executed.
++ If no exception occurs, the except clause is skipped.
++ If an exception occurs during the execution of a try statement, the rest of the clause is skipped. If the type matches the exception of the except, the except statement is executed.
++ If the exception does not match the exception named in the except clause, it is passed to outer try statements, if not handler is found, it is an unhandled exception and the execution stops.
+
+=== Common built-in Exceptions
+- `BaseException` is the common base class of all exceptions.
+- `Exception` is the base class of all the non-fatal exceptions.
+- Exceptions that are not subclasses of `Exception` are not typically hadled. They are used to indicate that the program should terminate e.g. `SystemExit` or `KeybordInterrupt`
+- `Exception` catches almost all exceptions, but it is a bad practice to use it. Allways try to be specific.
+
+=== Raising Exceptions
+- Use the `raise` keyword to manually raise an exception.
+- The `raise` keyword receives an argument that must be eithere an exception instance or an exception class (A class that derives from `BaseException` or `Exception`)
+#codeBlock(```python
+number = 10
+if number > 5:
+  raise Exception(f"The number should exceed be 5")
+```)
+
+- The `raise` keyword implicitely call the constructor with no arguemnts
+#codeBlock(```python
+raise ValueError # raise ValueError()
+```)
+
+- A simple `raise` statement re-raises a catched exception:
+#codeBlock(```python
+try:
+  ...
+except ValueError:
+  ...
+  raise # raise ValueError
+```)
+
+=== The finally clause (clean-up actions)
+- The `finally` optional clause executes either an exception occurs ot not.
+- It is intended to define clean-up actions.
+#codeBlock(```python
+try:
+  raise KeybordInterrupt
+finally:
+  print("Good bye")
+```)
+
+Some things to take in count are:
+- If no exception is handled by an `except` clause, the exception is re-raised after the `finally` clause has been executed.
+- If the `finally` clause executes a `break`, `continue`, or `return` statement, exceptions are not re-raised.
+- If the `try` statement reaches a `break`, `continue` or `return` statement, the finally clause executes before to the break, continue or return statement's execution.
+- If a `finally` clause includes a `return` statement, the returned value will be the one from the `finally` statement, not the value from the `try`clause.
+
+=== Custom Exceptions
+- To define custom exceptions create a new class that inherits from the `Exception` class:
+#codeBlock(```python
+class CustomError(Exception):
+  ...
+  pass
+```)
+
+- We can also customize the exception adding a constructor.
 
 == TO DO
-- Exceptions
+- Self documenting expressions
+- AssertionError for debugging
 
 == Conclusions
 Some important concepts to keep in mind are:
