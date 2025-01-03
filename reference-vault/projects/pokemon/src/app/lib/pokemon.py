@@ -21,7 +21,7 @@ class Pokemon:
         if move_index > len(self.moves):
             raise Exception(f"Move index should be between 1 and {len(self.moves)}")
 
-        move = self.moves[move_index - 1]
+        move = self.moves[move_index]
         damage = utils.calculate_damage(self.level, move.damage)
         target.take_damage(damage)
         logs.attack(self.name)

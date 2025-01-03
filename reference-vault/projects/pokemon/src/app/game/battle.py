@@ -58,12 +58,19 @@ class Battle:
 
         match user_input_int:
             case 1:
-                self.players_turn.use_move(1, self.not_players_turn)
+                self.use_movement()
             case 2:
                 self.players_turn.heal()
             case _:
                 logs.invalid_action()
                 self.action()
+
+        self.players_turn
+
+    def use_movement(self):
+        logs.choose_movement(self.players_turn.moves)
+        user_input_int = io.read_input_int("Select an option: ")
+        self.players_turn.use_move(user_input_int, self.not_players_turn)
 
     def show_health_bars(self):
         logs.show_pokemon_healthbar(self.pokemon1)

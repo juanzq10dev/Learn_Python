@@ -1,6 +1,8 @@
 from functools import wraps
 from tqdm import tqdm
 from app.lib.pokemon import Pokemon
+from app.lib.move import Pokemon_Move
+from typing import List
 
 
 def show_log(function):
@@ -31,6 +33,26 @@ def invalid_action() -> str:
 def attack(player_name: str) -> str:
     return f"{player_name} attacked!\n"
 
+
+@show_log
+def select_pokemon(pokemon_team: List["Pokemon"]):
+    message = "Select a pokemon:\n"
+    for i in range(len(pokemon_team)):
+        message += f"{i}. {pokemon_team[i].name} \n"
+
+    return message
+
+@show_log
+def choose_movement(moves: List["Pokemon_Move"]):
+    message = "Choose a movement: \n"
+    for i in range(len(moves)):
+        message += f"{i}. {moves[i].name} \n"
+    
+    return message
+
+@show_log
+def use_movement(pokemon_name: str, move_name:str) -> str:
+    return f"{pokemon_name} used {move_name}" 
 
 def display_health_bar(name: str, health: int, max_health: int) -> None:
     bar = tqdm(
