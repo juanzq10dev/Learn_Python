@@ -1,4 +1,5 @@
-import app.lib.logs as logs
+import app.ui.messages as logs
+import app.lib.utils as utils
 from app.lib.move import Pokemon_Move
 
 
@@ -8,6 +9,7 @@ class Pokemon:
         self.hp = hp
         self.max_hp = hp
         self.status = None
+        self.level = 50
         self.moves = [
             Pokemon_Move("Close Combat", 120),
             Pokemon_Move("Stone Edge", 100),
@@ -15,14 +17,19 @@ class Pokemon:
             Pokemon_Move("Payback", 50),
         ]
 
-    def attack(self, target: "Pokemon"):
-        target.hp -= 10
+    def use_move(self, move_index: int, target: "Pokemon"):
+        if move_index > len(self.moves):
+            raise Exception(f"Move index should be between 1 and {len(self.moves)}")
+
+        move = self.moves[move_index]
+        damage = utils.calculate_damage(self.level, move.damage)
+        target.take_damage(damage)
         logs.attack(self.name)
 
-    def choose_attack(self):
-        print("Choose attack")
-        for i in range(len(self.moves)):
-            print(f"{i}: {self.moves[i].name}")
+    def take_damage(self, damage) -> None:
+        self.hp -= damage
+        if self.hp < 0:
+            self.hp = 0
 
     def heal(self):
         self.hp += 10
