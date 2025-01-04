@@ -360,6 +360,77 @@ Some important concepts to keep in mind are:
   + Terminates the loop when `next()` raises the `StopIterator` exception.
 - The `finally` clause contain some complex cases. (Review the exceptions notes or the exceptions jupiter notebook on the repo)
 
+= Lambdas
+- Lambdas are a small anonymous function.
+- They are just like normal functions and behave like them.
+- The main use of lambda functions on Python is using them as arguments to higher order function.
+
+#codeBlock(```python
+lambda arguments: expressions
+```)
+
+Some main features of lambda function are:
+- Do not have a name (are anonymous).
+- Can have many arguments.
+- Limited to one expression; no complex logic or multiple statements
+- It is assumed that the single expression is returned.
+
+*Examples:*
+Lambda with multiple arguments
+#codeBlock(```python
+add = lambda a, b: a + b
+print(add(3, 5)) # Output 8
+```)
+
+Using lambda in map
+#codeBlock(```python
+nums = [1, 2, 3, 4]
+squared = list(map(lambda x: x ** 2, nums))
+print(squared)  # Output: [1, 4, 9, 16]
+```)
+
+=== Lambdas late binding
+First, we need to understand bound and unbound variables:
+
+- A bound variable is an argument to a lambda function
+#codeBlock(```python
+lambda x: x + 1 # x is a bound variable
+```)
+
+- A free variable(or unbound variable) is not bound and may be referenced in the body of the expression. (IMPORTANT: When a lambda has free variables it becomes a *closure*)
+#codeBlock(```python
+y = 10
+lambda x: x + y # y is a free variable
+```)
+
+Free variables are looked up at the time the lambda executes, not when the lambda is defined.
+#codeBlock(```python
+numbers = 'one', 'two', 'three'
+funcs = []
+for n in numbers:
+  funcs.append(lambda: print(n))
+
+# At this point funcs is a list that contain the lambda expressions.
+
+for f in funcs:
+  f() # Here lambda executes
+
+# Output is: three, three, three
+```)
+
+To solve this use default arguments to assign the free variable at definition time:
+#codeBlock(```python
+numbers = 'one', 'two', 'three'
+funcs = []
+for n in numbers:
+  funcs.append(lambda n=n: print(n)) # n defined as argument.
+
+for f in funcs:
+  f() # Here lambda executes
+
+# Output is: one, two, three
+```)
+
 = Design Patterns
 == Decorator
 - Adds new functionality to an existing object without modifying its structure.
