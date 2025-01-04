@@ -403,7 +403,7 @@ y = 10
 lambda x: x + y # y is a free variable
 ```)
 
-Free variables are looked up at the time the lambda executes, not when the lambda is defined.  
+Free variables are looked up at the time the lambda executes, not when the lambda is defined.
 #codeBlock(```python
 numbers = 'one', 'two', 'three'
 funcs = []
@@ -423,7 +423,7 @@ To solve this use default arguments to assign the free variable at definition ti
 numbers = 'one', 'two', 'three'
 funcs = []
 for n in numbers:
-  funcs.append(lambda n=n: print(n)) # n defined as argument. 
+  funcs.append(lambda n=n: print(n)) # n defined as argument.
 
 for f in funcs:
   f() # Here lambda executes
