@@ -1,4 +1,4 @@
-import app.ui.messages as logs
+import app.ui.messages as display_message
 import app.lib.utils as utils
 from app.lib.move import Pokemon_Move
 
@@ -24,7 +24,7 @@ class Pokemon:
         move = self.moves[move_index]
         damage = utils.calculate_damage(self.level, move.damage)
         target.take_damage(damage)
-        logs.attack(self.name)
+        display_message.attack(self.name)
 
     def take_damage(self, damage) -> None:
         self.hp -= damage
