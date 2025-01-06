@@ -558,3 +558,59 @@ def my_decorator(func):
     return result
   return wrapper
 ```)
+
+= Object Oriented Programming
+NOTE: These notes do not delve deeply into the concepts of Object-Oriented Programming (OOP); they focus solely on how to implement OOP using Python.
+== Classes
+=== Class definition
+Use the `class` keyword, then add the name of the class and a colon. Any code indent below the class definition is part of the class's body:
+#codeBlock(```python
+class Dog:
+  pass
+```)
+
+=== Adding attributes
+==== Instance attributes
+- Instance attributes are values specific to a particular instance of the class. (All instance has the attributes, but the values may differ)
+- Attributes created in the `__init__()` are instance attributes.
+- The `__init__()` function is the constructor of the functions. 
+- It sets the initial state of the object.
+- First parameter must be `self`.
+- Python uses `self` to define the new attributes on the object. 
+#codeBlock(```python
+class Dog:
+  def __init__(self, name, age):
+    self.name = name
+    self.age = age
+```)
+
+==== Class attributes.
+- Class attributes are attributes shared by all instances.
+- Variables assigned outside of `__init__()` are class attributes.
+#codeBlock(```python
+class Dog:
+  species = "Canis familiaris" # Class attribute
+
+  def __init__(self, name, age):
+    self.name = name
+    self.age = age
+```)
+
+=== Defining methods
+==== Instance methods
+- Functions defined inside the class are instance methods.
+- An instance method always takes `self` as its first parameter.
+#codeBlock(```python
+class Dog:
+  species = "Canis familiaris" # Class attribute
+
+  def __init__(self, name, age):
+    self.name = name
+    self.age = age
+  
+  def bark(self): # instance method.
+    return "Guau, guau"
+```)
+
+=== Private variables
+Private variables do not exist on Python. However there is a convention: A name prefixed with an underscore (e.g. `_spam`) should be treated as non-public.
