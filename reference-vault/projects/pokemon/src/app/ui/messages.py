@@ -5,7 +5,7 @@ from app.lib.move import Pokemon_Move
 from typing import List
 
 
-def show_log(function):
+def display_message(function):
     @wraps(function)
     def wrapper(*args, **kwargs):
         str = function(*args, **kwargs)
@@ -14,27 +14,27 @@ def show_log(function):
     return wrapper
 
 
-@show_log
+@display_message
 def show_winner(player_name: str) -> str:
     return f"{player_name} wins\n"
 
 
-@show_log
+@display_message
 def choose_action(player_name: str) -> str:
     return f"\n{player_name}'s turn:\n" + "\t1. Attack\n" + "\t2. Heal\n"
 
 
-@show_log
+@display_message
 def invalid_action() -> str:
     return "Please select 1 or 2"
 
 
-@show_log
+@display_message
 def attack(player_name: str) -> str:
     return f"{player_name} attacked!\n"
 
 
-@show_log
+@display_message
 def select_pokemon(pokemon_team: List["Pokemon"]):
     message = "Select a pokemon:\n"
     for i in range(len(pokemon_team)):
@@ -42,15 +42,15 @@ def select_pokemon(pokemon_team: List["Pokemon"]):
 
     return message
 
-@show_log
+@display_message
 def choose_movement(moves: List["Pokemon_Move"]):
     message = "Choose a movement: \n"
     for i in range(len(moves)):
-        message += f"{i}. {moves[i].name} \n"
+        message += f"\t{i}. {moves[i].name} \n"
     
     return message
 
-@show_log
+@display_message
 def use_movement(pokemon_name: str, move_name:str) -> str:
     return f"{pokemon_name} used {move_name}" 
 
