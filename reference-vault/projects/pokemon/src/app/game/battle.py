@@ -5,13 +5,9 @@ from app.game.trainer import Pokemon_Trainer
 
 
 class Battle:
-    def __init__(self):
-        self.trainer1 = Pokemon_Trainer(
-            "Player 1", [Pokemon("Pikachu", 100), Pokemon("Raychu", 200)]
-        )
-        self.trainer2 = Pokemon_Trainer(
-            "Player 2", [Pokemon("Charizard", 100), Pokemon("Bulbasaur", 200)]
-        )
+    def __init__(self, trainer1: Pokemon_Trainer, trainer2: Pokemon_Trainer):
+        self.trainer1 = trainer1
+        self.trainer2 = trainer2
         self.pokemon1 = self.trainer1.pokemon_team[0]
         self.pokemon2 = self.trainer2.pokemon_team[0]
         self.players_turn = self.pokemon2
@@ -25,14 +21,12 @@ class Battle:
         else:
             self.players_turn = self.pokemon1
             self.not_players_turn = self.pokemon2
-    
-    
+
     def update_pokemon(self):
         if self.players_turn is self.pokemon1:
-            self.pokemon1 =  self.trainer1.choose_pokemon()
+            self.pokemon1 = self.trainer1.choose_pokemon()
         else:
             self.pokemon2 = self.trainer2.choose_pokemon()
-            
 
     def game_loop(self):
         game_finished = False
