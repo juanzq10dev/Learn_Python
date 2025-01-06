@@ -21,7 +21,7 @@ def show_winner(player_name: str) -> str:
 
 @display_message
 def choose_action(player_name: str) -> str:
-    return f"\n{player_name}'s turn:\n" + "\t1. Attack\n" + "\t2. Heal\n"
+    return f"\n{player_name}'s turn:\n" + "\t1. Attack\n" + "\t2. Heal\n" + "\t3. Change Pokemon\n"
 
 
 @display_message
