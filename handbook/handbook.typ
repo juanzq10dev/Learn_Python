@@ -573,10 +573,10 @@ class Dog:
 ==== Instance attributes
 - Instance attributes are values specific to a particular instance of the class. (All instance has the attributes, but the values may differ)
 - Attributes created in the `__init__()` are instance attributes.
-- The `__init__()` function is the constructor of the functions. 
+- The `__init__()` function is the constructor of the functions.
 - It sets the initial state of the object.
 - First parameter must be `self`.
-- Python uses `self` to define the new attributes on the object. 
+- Python uses `self` to define the new attributes on the object.
 #codeBlock(```python
 class Dog:
   def __init__(self, name, age):
@@ -607,10 +607,89 @@ class Dog:
   def __init__(self, name, age):
     self.name = name
     self.age = age
-  
+
   def bark(self): # instance method.
     return "Guau, guau"
 ```)
 
+==== TODO
+- Static methods
+- Class methods
+
 === Private variables
 Private variables do not exist on Python. However there is a convention: A name prefixed with an underscore (e.g. `_spam`) should be treated as non-public.
+
+== Inheritance
+Python supports inheritance using the next syntax
+#codeBlock(```python
+class DerivedClassName(BaseClassName):
+  <statement(s)>
+```)
+
+Features:
+- The derived class inherits all functions and variables of the base class.
+- The function `super()` allows access to the parent class's methods in the child class.
+
+=== Overriding methods
+Overriding allows a child class to redefine a method that is already defined in its parent class.
+
+#codeBlock(```python
+class Animal:
+  def sound(self):
+    return "Some generic sound"
+
+class Dog:
+  def sound(self): # Overriding method
+    return "Woof"
+```)
+
+Overriding main features:
+- The method in the child class must have the same name and signature as the one in the parent class.
+- Using `super()` helps retain and extend the parent class's functionality.
+
+#codeBlock(```python
+class Animal:
+  def sound(self):
+    return "Some generic sound"
+
+class Dog:
+  def sound(self):
+    return super().sound() + "Woof" # Using super()
+```)
+
+=== Abstract classes
+A class becomes abstract if it inherits from the `ABC` class (Abstract Base Class) on the `abc` module.
+#codeBlock(```python
+from abc import ABC, abstractmethod
+
+# Abstract Class
+class Animal(ABC):
+  @abstractmethod
+  def sound(self):
+    pass
+
+# Concrete subclass
+class Dog(Animal):
+  def sound(self):
+    return "Woof!"
+```)
+
+Key features of Abstract Classes:
+- *Abstract methods:* Declared using the `@abstractmethod` decorator. Subclasses are required to override those methods.
+- *Partial implementation:* Abstract classes can include fully implemented methods that provdide default behavior.
+- *Cannot Instantiate:* You cannot create an instance of an abstract class.
+
+=== Multiple inheritance
+A class may inherit from multiple classes
+#codeBlock(```python
+class DerivedClassName(BaseClass1, BaseClass2, BaseClass3):
+  <statement(s)>
+```)
+
+=== Methods Resolution Order (MRO)
+- Determines the order in which classes are searched for a method.
+- In simple inhneritance, first it searches on the derived class, if not found, searches on the base class.
+- On simple scenarios, method resolution order (MRO) goes as depth-first, left-to-right, not searching twice in the same class.
+- The methods resolution order changes dynamically to support cooperative calls to `super()`.
+- Dynamic ordering in MRO is necesary because all cases of multiple inheritance exhibit one or more diamond relationships (at least one parent classes can be accessed through different paths)
+- Complex inheritance may not reach all conditions MRO requires. In this case Python just fails.
